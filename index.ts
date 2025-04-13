@@ -85,7 +85,7 @@ app.shortcut(
             Do not include any disclaimers or apologies.
             Do not say anything before or after the bullet points.
             Do not include any code blocks.
-            Use the '-' (without quotes) character to indicate a bullet point.`
+            Use the '-' (without quotes) character to indicate a bullet point.`,
         },
         {
           role: "user",
@@ -101,10 +101,11 @@ app.shortcut(
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `:white_check_mark: Summary:\n\n${summaryText}`,
+            text: `:white_check_mark: *Here's your summary, <@${payload.user}>:*\n\n${summaryText}`,
           },
         },
       ],
+      replace_original: true,
     });
   }
 );
