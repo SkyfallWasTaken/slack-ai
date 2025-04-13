@@ -101,7 +101,7 @@ app.shortcut(
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `:white_check_mark: *Here's your summary, <@${payload.user}>:*\n\n${summaryText}`,
+            text: `:white_check_mark: *Here's your summary, <@${payload.user.id}>:*\n\n${summaryText}`,
           },
         },
       ],
