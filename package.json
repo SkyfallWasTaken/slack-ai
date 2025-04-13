@@ -1,0 +1,18 @@
+{
+  "name": "slack-ai",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@slack/bolt": "^4.2.1",
+    "@slack/types": "^2.14.0",
+    "arktype": "^2.1.19",
+    "openai": "^4.93.0"
+  }
+}
