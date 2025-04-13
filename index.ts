@@ -40,13 +40,61 @@ const app = new App({
 
 app.shortcut(
   { callback_id: "summarize_thread", type: "message_action" },
-  async ({ ack, client, payload, respond }) => {
+  async ({ ack, client, payload, respond, context }) => {
     await ack();
 
     const threadTs = payload.message.thread_ts || payload.message.ts;
     const channelId = payload.channel.id;
 
-    const messages = await fetchEntireThread(client, channelId, threadTs);
+    let messages = undefined;
+    try {
+      messages = await fetchEntireThread(client, channelId, threadTs);
+    } catch (error) {
+      const errorStr = error as string;
+      if (errorStr.includes("not_in_channel")) {
+        await respond({
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `:x: Please add ${context.bot_user_id} to the channel to summarize the thread.`,
+              },
+            },
+          ],
+        });
+        return;
+      }
+
+      if (errorStr.includes("channel_not_found")) {
+        await respond({
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `:x: This is a private channel. Please add ${context.bot_user_id} to the channel to summarize the thread.`,
+              },
+            },
+          ],
+        });
+        return;
+      }
+
+      console.error(`Error fetching thread: ${errorStr}`);
+      await respond({
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `:x: Error fetching thread: ${errorStr}`,
+            },
+          },
+        ],
+      });
+      return;
+    }
     const messagesText = messages
       .map(
         (message) =>
