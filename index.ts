@@ -59,7 +59,7 @@ app.shortcut(
               type: "section",
               text: {
                 type: "mrkdwn",
-                text: `:x: Please add ${context.bot_user_id} to the channel to summarize the thread.`,
+                text: `:x: Please add <@${context.botUserId}> to the channel to summarize the thread.`,
               },
             },
           ],
