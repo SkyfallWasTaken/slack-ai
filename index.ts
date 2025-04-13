@@ -50,7 +50,8 @@ app.shortcut(
     try {
       messages = await fetchEntireThread(client, channelId, threadTs);
     } catch (error) {
-      const errorStr = error as string;
+      // biome-ignore lint/suspicious/noExplicitAny: idc
+      const errorStr = (error as any).toString();
       if (errorStr.includes("not_in_channel")) {
         await respond({
           blocks: [
