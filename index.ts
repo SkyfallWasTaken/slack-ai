@@ -110,7 +110,10 @@ app.shortcut(
     // We're done! Update the modal with the summary
     clearInterval(interval);
     await updateModalText(
-      `:white_check_mark: *Here's your summary:*\n\n${summaryText}`
+      `:white_check_mark: *Here's your summary:*\n\n${summaryText
+        .split("\n")
+        .filter((line) => line.trim() !== "")
+        .join("\n")}`
     );
   }
 );
