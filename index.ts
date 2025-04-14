@@ -31,6 +31,15 @@ const app = new App({
   logLevel: LogLevel.INFO,
 });
 
+const slowLoadingMessages = [
+  ":safari-loading: Still working...",
+  ":hourglass: Still loading...",
+  ":hourglass_flowing_sand: Waiting for AI response...",
+  ":robot_face: AI is thinking...",
+  ":robot: AI is processing...",
+  ":spin-loading: Still working...",
+];
+
 app.shortcut(
   { callback_id: "summarize_thread", type: "message_action" },
   async ({ ack, client, payload, body, context }) => {
@@ -42,6 +51,14 @@ app.shortcut(
     const updateModalText = (text: string) => {
       updateModal(text, client, viewId);
     };
+
+    const interval = setInterval(() => {
+      updateModalText(
+        slowLoadingMessages[
+          Math.floor(Math.random() * slowLoadingMessages.length)
+        ] as string
+      );
+    }, 5000);
 
     // Step 1: Get all the thread messages
     let messages = undefined;
@@ -91,6 +108,7 @@ app.shortcut(
     }
 
     // We're done! Update the modal with the summary
+    clearInterval(interval);
     await updateModalText(
       `:white_check_mark: *Here's your summary:*\n\n${summaryText}`
     );
