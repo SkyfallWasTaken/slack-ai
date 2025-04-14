@@ -142,10 +142,6 @@ async function openInitialModal(
           },
         },
       ],
-      submit: {
-        type: "plain_text",
-        text: "Cancel",
-      },
     },
   });
   if (!result.ok) {
