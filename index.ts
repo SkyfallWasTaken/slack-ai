@@ -134,6 +134,8 @@ app.shortcut(
             Do not include any disclaimers or apologies.
             Do not say anything before or after the bullet points.
             Do not include any code blocks.
+            Do not mention a point if it's a passing comment (e.g. only one person in the thread mentioned it and it's not
+            particularly newsworthy).
             Use the '-' (without quotes) character to indicate a bullet point.`,
         },
         {
