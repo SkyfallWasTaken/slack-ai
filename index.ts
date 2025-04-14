@@ -169,7 +169,7 @@ async function getAiResponse(messagesText: string) {
                   The summary should be in bullet points.
                   The summary should be in English.
                   The summary should not be overly dumbed down - please provide relevant key facts and people as needed.
-                  Add up to 15 bullet points about the main points of the text.
+                  Add up to 10 bullet points about the main points of the text.
                   Include :reactions: if you think they are relevant. However, don't include them if they are not relevant to the summary.
                   In particular, do not include reactions if the message is a passing comment (e.g. only one person in the thread mentioned it and it's not particularly newsworthy).
                   Also, don't add lots of reactions if it's a "sob" or "cry" reaction. Try not to use reactions unless they actually help people understand
