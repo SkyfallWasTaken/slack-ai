@@ -64,7 +64,10 @@ app.shortcut(
       }
 
       // well, the channel has to exist if we're here
-      if (errorStr.includes("channel_not_found")) {
+      if (
+        errorStr.includes("channel_not_found") ||
+        errorStr.includes("method_not_supported_for_channel_type")
+      ) {
         await respond({
           text: `:x: This is a private channel. Please add <@${context.botUserId}> to the channel to summarize the thread.`,
         });
