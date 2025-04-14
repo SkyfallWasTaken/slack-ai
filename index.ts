@@ -102,7 +102,7 @@ app.shortcut(
     } catch (error) {
       console.error(`Error calling AI provider: ${error}`);
       await updateModalText(
-        ":x: Error whilst calling AI provider (probably because of rate limiting). Please try again in 2-3 minutes."
+        ":x: Error whilst calling AI provider (probably because of rate limiting). Please try again in 2-3 minutes, or DM <@U059VC0UDEU> for help."
       );
       return;
     }
