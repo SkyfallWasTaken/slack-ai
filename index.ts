@@ -163,7 +163,8 @@ app.shortcut(
 
       summaryText =
         summary.choices[0]?.message?.content || "_No summary found_";
-    } catch {
+    } catch (error) {
+      console.error(`Error calling AI provider: ${error}`);
       await respond({
         blocks: [
           {
