@@ -31,6 +31,15 @@ const app = new App({
   logLevel: LogLevel.INFO,
 });
 
+const slowLoadingMessages = [
+  ":safari-loading: Still working...",
+  ":hourglass: Still loading...",
+  ":hourglass_flowing_sand: Waiting for AI response...",
+  ":robot_face: AI is thinking...",
+  ":robot: AI is processing...",
+  ":spin-loading: Still working...",
+];
+
 app.shortcut(
   { callback_id: "summarize_thread", type: "message_action" },
   async ({ ack, client, payload, body, context }) => {
@@ -42,6 +51,14 @@ app.shortcut(
     const updateModalText = (text: string) => {
       updateModal(text, client, viewId);
     };
+
+    const interval = setInterval(() => {
+      updateModalText(
+        slowLoadingMessages[
+          Math.floor(Math.random() * slowLoadingMessages.length)
+        ] as string
+      );
+    }, 5000);
 
     // Step 1: Get all the thread messages
     let messages = undefined;
@@ -76,15 +93,12 @@ app.shortcut(
     const messagesText = messagesArrayToText(messages);
 
     // Step 2: Get the AI response
-    let summaryText = `:white_check_mark: Here's your summary!:\n\n`;
+    let summaryText = undefined;
     try {
-      for await (const chunk of await getAiResponse(messagesText)) {
-        const delta = chunk.choices[0]?.delta;
-        if (delta?.content) {
-          summaryText += delta.content;
-          await updateModalText(summaryText);
-        }
-      }
+      const summary = await getAiResponse(messagesText);
+      console.log(summary);
+      summaryText =
+        summary.choices[0]?.message?.content || "_No summary found_";
     } catch (error) {
       console.error(`Error calling AI provider: ${error}`);
       await updateModalText(
@@ -92,6 +106,12 @@ app.shortcut(
       );
       return;
     }
+
+    // We're done! Update the modal with the summary
+    clearInterval(interval);
+    await updateModalText(
+      `:white_check_mark: *Here's your summary:*\n\n${summaryText}`
+    );
   }
 );
 
@@ -243,7 +263,6 @@ async function getAiResponse(messagesText: string) {
         content: messagesText,
       },
     ],
-    stream: true,
   });
 }
 
