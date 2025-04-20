@@ -14,5 +14,8 @@
     "@slack/types": "^2.14.0",
     "arktype": "^2.1.19",
     "openai": "^4.93.0"
+  },
+  "scripts": {
+    "start": "bun ."
   }
 }
