@@ -259,11 +259,7 @@ async function getAiResponse(messagesText: string) {
     messages: [
       {
         role: "system",
-        content: prompt,
-      },
-      {
-        role: "user",
-        content: messagesText,
+        content: prompt.replace("{{SLACK_THREAD}}", messagesText),
       },
     ],
   });
