@@ -61,13 +61,18 @@ app.shortcut(
     }, 5000);
 
     // Step 1: Get all the thread messages
+    console.log("Getting all thread messages...");
     let messages = undefined;
     try {
+      console.log(`Attempting to join channel ${channelId}`);
       await client.conversations.join({
         channel: channelId,
       });
+      console.log("Fetching entire thread...");
       messages = await fetchEntireThread(client, channelId, threadTs);
     } catch (error) {
+      clearInterval(interval);
+      
       const errorStr = (
         error as unknown as { toString: () => string }
       ).toString();
@@ -93,6 +98,7 @@ app.shortcut(
     const messagesText = messagesArrayToText(messages);
 
     // Step 2: Get the AI response
+    console.log("Getting summary response...")
     let summaryText = undefined;
     try {
       const summary = await getAiResponse(messagesText);
@@ -101,6 +107,7 @@ app.shortcut(
         summary.choices[0]?.message?.content || "_No summary found_";
     } catch (error) {
       console.error(`Error calling AI provider: ${error}`);
+      clearInterval(interval);
       await updateModalText(
         ":x: Error whilst calling AI provider (probably because of rate limiting). Please try again in 2-3 minutes, or DM <@U059VC0UDEU> for help."
       );
@@ -109,6 +116,7 @@ app.shortcut(
 
     // We're done! Update the modal with the summary
     clearInterval(interval);
+    console.log("Successfully fetched AI summary!");
     await updateModalText(
       `:white_check_mark: *Here's your summary:*\n\n${summaryText
         .split("\n")
