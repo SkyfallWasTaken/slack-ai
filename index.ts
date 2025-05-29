@@ -74,7 +74,7 @@ app.shortcut(
       messages = await fetchEntireThread(client, channelId, threadTs);
     } catch (error) {
       clearInterval(interval);
-      
+
       const errorStr = (
         error as unknown as { toString: () => string }
       ).toString();
@@ -100,7 +100,7 @@ app.shortcut(
     const messagesText = messagesArrayToText(messages);
 
     // Step 2: Get the AI response
-    console.log("Getting summary response...")
+    console.log("Getting summary response...");
     let summaryText = undefined;
     try {
       const summary = await getAiResponse(messagesText);
@@ -119,8 +119,15 @@ app.shortcut(
     // We're done! Update the modal with the summary
     clearInterval(interval);
     console.log("Successfully fetched AI summary!");
+
+    // Remove <thread_analysis> blocks
+    const cleanedSummaryText = summaryText.replace(
+      /<thread_analysis>[\s\S]*?<\/thread_analysis>/g,
+      ""
+    );
+
     await updateModalText(
-      `:white_check_mark: *Here's your summary:*\n\n${summaryText
+      `:white_check_mark: *Here's your summary:*\n\n${cleanedSummaryText
         .split("\n")
         .filter((line) => line.trim() !== "")
         .join("\n")}`
