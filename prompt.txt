@@ -44,18 +44,7 @@ Please follow these steps to create your summary:
 
 16. Do not add a summary of the bullet point to the start of a bullet point.
 
-Before providing your final summary, in <thread_analysis> tags inside your thinking block:
-
-a) List key discussion points with relevant quotes
-b) Identify important reactions and their counts
-c) Note any user IDs and channel IDs that need formatting
-d) List any messages by user <@U08FP1HKKFZ> with their upvotes and downvotes
-e) Identify any instances where abbreviations (HC, YSWS) could be used
-f) Identify instances where USLACKBOT can be changed to just Slackbot
-
-This analysis will help ensure you've covered all the key points and formatting requirements.
-
-Then, outside of the thinking block, provide your final summary in the following format:
+Provide your final summary in the following format:
 
 • [First bullet point of the summary]
 • [Second bullet point of the summary]
