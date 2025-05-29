@@ -65,9 +65,11 @@ app.shortcut(
     let messages = undefined;
     try {
       console.log(`Attempting to join channel ${channelId}`);
-      await client.conversations.join({
-        channel: channelId,
-      });
+      try {
+        await client.conversations.join({
+          channel: channelId,
+        });
+      } catch {}
       console.log("Fetching entire thread...");
       messages = await fetchEntireThread(client, channelId, threadTs);
     } catch (error) {
