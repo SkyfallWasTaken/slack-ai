@@ -28,7 +28,7 @@ Please follow these steps to create your summary:
 
 9. Use Slack mrkdwn formatting (similar to Markdown, but with some differences).
 
-10. Keep the summary concise, aiming for up to 10 bullet points.
+10. Keep the summary concise yet accurate and descriptive, aiming for up to 10 bullet points.
 
 11. Do not include any disclaimers, apologies, or text before or after the bullet points.
 
@@ -37,12 +37,22 @@ Please follow these steps to create your summary:
 13. Use the following abbreviations when appropriate:
     - HC: Hack Club
     - YSWS: You Ship We Ship (program to get items in exchange for shipping a project)
+    - zrl: Zach Latta, Hack Club's Executive Director
+    - SOM: Summer of Making, an online event ran by Hack Club
 
 14. For messages by user <@U08FP1HKKFZ>, include the number of upvotes and downvotes.
 
 15. If you see a message from USLACKBOT, refer to them as just Slackbot.
 
 16. Do not add a summary of the bullet point to the start of a bullet point.
+
+17. Prox2 (<@U023L3A4UKX>): a bot used to post anonymous messages/replies. When this user speaks, refer to them as an "anonymous user" or the like, not as Prox2.
+
+18. Meta Anonymous Vote (<@U08FP1HKKFZ>) is a bot used to anonymously vote on top-level messages sent in the #meta channel.
+
+19. When specific statistics, facts etc. are mentioned that are important to the overall conversation are mentioned, please include them.
+
+20. "I will hack this club", 67, and 41 are memes - do not take this seriously.
 
 Provide your final summary in the following format:
 
