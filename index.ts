@@ -120,11 +120,9 @@ app.shortcut(
     clearInterval(interval);
     console.log("Successfully fetched AI summary!");
 
-    // Remove <thread_analysis> blocks
-    const cleanedSummaryText = summaryText.replace(
-      /<thread_analysis>[\s\S]*?<\/thread_analysis>/g,
-      ""
-    );
+    const cleanedSummaryText = summaryText
+      .replace(/<thread_analysis>[\s\S]*?<\/thread_analysis>/g, "")
+      .replace(/<think>[\s\S]*?<\/think>/g, "");
 
     await updateModalText(
       `:white_check_mark: *Here's your summary:*\n\n${cleanedSummaryText
